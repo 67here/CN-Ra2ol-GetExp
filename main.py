@@ -17,24 +17,23 @@ print('5秒后开始运行')
 sleep(1)
 
 app = application.Application(backend='uia')
-xx = os.getcwd() + '\新平台.lnk'
+xx = os.getcwd() + '\打开平台.lnk'
 win32api.ShellExecute(0, 'open', xx, '', '', 1)
 sleep(4)
 
-app.connect(title_re='公测平台', class_name='Window')
-app.window(title_re="公测平台")['登录'].wait('ready', timeout=10)
-app.window(title_re="公测平台")['登录'].click()
+app.connect(title_re='鸿图平台', class_name='Window')
+app.window(title_re="鸿图平台")['登录'].wait('ready', timeout=10)
+app.window(title_re="鸿图平台")['登录'].click()
 
 app.window(title='MainWindow', class_name='Window').wait('visible')
 app.connect(title='MainWindow', class_name='Window')
-app['MainWindow']['关闭'].wait('ready')
-app['MainWindow']['关闭'].click()
 sleep(2)
-app['MainWindow'].listbox['Client.ListItemProp_Lobby'].select().click_input(button='left', double=True)
+
+app['MainWindow'].listbox['HTPlatformBeta.ListItemProp_Lobby'].select().click_input(button='left', double=True)
+sleep(3)
 
 while i:
     i += 1
-    app['MainWindow'].child_window(title="创建房间", control_type="Button").wait('ready')
     app['MainWindow']['创建房间'].click()
 
     app.window(title='创建房间', class_name='Window').wait('ready')
@@ -47,7 +46,6 @@ while i:
 
     os.system("time 1:00:00")
     app.window(title='MainWindow', class_name='Window').wait('ready')
-    app.connect(title='MainWindow', class_name='Window')
     app['MainWindow'].child_window(title="开始游戏", control_type="Button").wait('ready')
     app['MainWindow']['开始游戏'].click()
     sleep(2)
@@ -56,7 +54,7 @@ while i:
     print('\n')
     while 1:
         sleep(0.5)
-        lst = app['MainWindow'].child_window(auto_id="Frame_Right_Lobby", control_type="Pane").Static.texts()
+        lst = app['MainWindow'].child_window(auto_id="Frame_Right", control_type="Pane").Static.texts()
         if lst[0] != '等待程序结束中.....':
             break
     list1 = list(lst[0])
