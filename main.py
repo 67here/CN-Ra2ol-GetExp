@@ -20,18 +20,14 @@ sleep(2)
 while i:
     i += 1
     app['MainWindow']['创建房间'].click()
-    sleep(2)
     app.window(title='创建房间', class_name='Window').wait('ready')
     app.connect(title='创建房间', class_name='Window')
-    sleep(2)
     app['创建房间'].child_window(auto_id="pwd", control_type="Edit").type_keys('1')
-    sleep(2)
     app['创建房间'].child_window(title="创建房间（Enter）", auto_id="createButton", control_type="Button").wait('ready')
     sleep(2)
     app['创建房间']['创建房间（Enter）'].click()
 
     os.system("time 1:00:00")
-    sleep(2)
     app.window(title='MainWindow', class_name='Window').wait('ready')
     sleep(2)
     app['MainWindow'].child_window(title="开始游戏", control_type="Button").wait('ready')
@@ -41,7 +37,7 @@ while i:
     os.system("taskkill /im gamemd-spawn.exe /f")
     print('\n')
     while 1:
-        sleep(2)
+        sleep(1)
         lst = app['MainWindow'].child_window(auto_id="Frame_Right", control_type="Pane").Static.texts()
         if lst[0] != '等待程序结束中.....':
             break
