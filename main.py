@@ -19,6 +19,7 @@ sleep(2)
 
 while i:
     i += 1
+    sleep(2)
     app['MainWindow']['创建房间'].click()
     app.window(title='创建房间', class_name='Window').wait('ready')
     app.connect(title='创建房间', class_name='Window')
